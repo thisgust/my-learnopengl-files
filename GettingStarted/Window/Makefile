@@ -1,2 +1,2 @@
 make:
-	g++ *.cpp ../../glad.c  -o Juego.exe -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -I../../include
+	g++ *.cpp ../../glad.c -lglfw -lGL -lX11 -lpthread -lXrandr -lXi -ldl -I../../include
