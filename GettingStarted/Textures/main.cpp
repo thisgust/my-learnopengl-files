@@ -7,18 +7,6 @@
 const int WIDTH = 800;
 const int HEIGHT = 600;
 
-float vertices[] = {
-    // positions         // colors
-     0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // bottom right
-    -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,   // bottom left
-     0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f    // top 
-};
-
-float vertices2[] = {
-     0.5f, -0.5f, 0.0f,
-    -0.5f, -0.5f, 0.0f,
-     0.0f,  0.5f, 0.0f 
-};
 
 float vertices3[] = {
     // positions          // colors           // texture coords
@@ -93,10 +81,11 @@ int main() {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
 	int width, height, nrChannels;
-	unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 0);
-	unsigned int texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
+	stbi_set_flip_vertically_on_load(true);
+	unsigned char *data = stbi_load("ado.jpg", &width, &height, &nrChannels, 0);
+	unsigned int texture1;
+	glGenTextures(1, &texture1);
+	glBindTexture(GL_TEXTURE_2D, texture1);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	stbi_image_free(data);
@@ -104,7 +93,7 @@ int main() {
 	Shader shader1("shaders/vertex.glsl", "shaders/frag.glsl");
 
 	while(!glfwWindowShouldClose(window)) {
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glBindTexture(GL_TEXTURE_2D, texture1);
 		drawQuad(shader1, vertices3, indices, sizeof(vertices3), sizeof(indices));
 		glfwSwapBuffers(window);
 		glfwPollEvents();
