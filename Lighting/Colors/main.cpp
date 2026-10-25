@@ -135,7 +135,8 @@ int main() {
     	std::cout << "Failed to initialize GLAD" << std::endl;
     	return -1;
 	}
-
+	
+	glEnable(GL_DEPTH_TEST);
 
 	unsigned int VBO, cubeVAO;
 	glGenBuffers(1, &VBO);
